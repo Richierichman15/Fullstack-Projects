@@ -1,13 +1,29 @@
 .game {
-    width: 50px;
-    height: 50px;
+    width: 100px;
+    height: 100px;
     border: 2px solid;
+    box-shadow: 0 0 0 2px;
+    line-height: 75px;
+    font-size: 70px;
+    cursor: pointer;
+}
+
+#ticcontainer {
+    text-align: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 #gamecontainer {
-    /* display: flex;
-    flex-flow: row wrap; */
     display: grid;
     grid-template-columns: repeat(3, auto);
     width: 225px;
+    height: 225px;
+    margin: 10px auto;
 }
+
+#status {
+    display: flex;
+    justify-content: center;
+    margin: 125px;
+}
+
