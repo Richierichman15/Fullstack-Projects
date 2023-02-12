@@ -1,37 +1,60 @@
-import React, { useState, useEffect } from 'react'
-
+import React, { useState } from 'react'
+import { useNavigate } from "react-router-dom";
 
 const Login = (props) => {
     const [ showLoginButton, setShowLoginButton ] = useState(false)
     const [ username, setUserName ] = useState('')
     const [ password, setPassWord ] = useState('')
+    const navigate = useNavigate();
 
-    const logIn = async() => {
-        window.localStorage.setItem('token', 'fdsafdsabf-dsaf')
-        props.setIsLoggedIn(true)
+    const handleLogIn = async(e) => {
+        e.preventDefault()
+        fetch('https://strangers-things.herokuapp.com/api/2211-ftb-et-web-am/users/login', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+     },
+            body: JSON.stringify({
+                user: {
+                username: username,
+                password: password
+      }
+    })
+            }).then(response => response.json())
+                 .then(result => {
+                     console.log(result);
+                     window.localStorage.setItem('token', result.data.token)
+                     props.setIsLoggedIn(true)
+                     navigate('/profile')
+            })
+            .catch(console.error);
+
+        
     }
-
-    // useEffect(() => {
-    //     fetch('https://strangers-things.herokuapp.com/api/2211-ftb-et-web-am/users/register', {
-    //         method: "POST",
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },
-    //         body: JSON.stringify({
-    //             user: {
-    //             username: 'superman27',
-    //             password: 'krypt0n0rbust'
-    //             }
-    //         })
-    //         }).then(response => response.json())
-    //         .then(result => {
-    //             console.log(result);
-    //         })
-    //         .catch(console.error);
-    // }, [])
     const handlePasswordChange = (e) => {
-        console.log(e)
         setPassWord(e.target.value)
+    }
+    
+    const handleClick = (e) => {
+        e.preventDefault();
+        console.log('hi')
+        fetch('https://strangers-things.herokuapp.com/api/2211-ftb-et-web-am/users/register', {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            user: {
+                username: username,
+                password: password
+            }
+        })
+        }).then(response => response.json())
+        .then(result => {
+            console.log(result);
+            window.localStorage.setItem('token', result.data.token)
+        })
+        .catch(console.error);
     }
 
     return (
@@ -45,12 +68,12 @@ const Login = (props) => {
             {
                 showLoginButton ?
                 <>
-                <button onClick={logIn}>Login</button>
+                <button onClick={handleLogIn}>Login</button>
                 <button onClick={() => setShowLoginButton(false)}>Not Registered? Click Here!</button> 
                 </> :
                 <>
                 <input type="text" placeholder='confirm password'></input>
-                <button>Register</button>
+                <button onClick={handleClick}>Register</button>
                 <button onClick={() => setShowLoginButton(true)}>Already Registered? Click Here!</button>
                 </>
             }
