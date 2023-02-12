@@ -6,7 +6,26 @@ import NewPost from './NewPost';
 
 const Post = () => {
     const [ posts, setPosts ] = useState([])
+    const [filteredPosts, setFilterPosts] = useState([])
+    const [ text, setText ] = useState('')
+
     const  navigate = useNavigate()
+
+    
+    function postMatches(post) {
+        
+        if (text) {
+            const str = `/(${text})\w+/gi`
+            const regexp = str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+            const regexpFilter = new RegExp(regexp);
+            const hasMatched = regexpFilter.test(post.title)
+            console.log('====================================');
+            console.log(hasMatched);
+            console.log('====================================');
+            return hasMatched 
+        }
+        return true
+    }
 
 useEffect(() => {
     const getPost = () => {
@@ -28,9 +47,9 @@ useEffect(() => {
 const showNewPost = () => {
     navigate('/post/add')
 }
-const allPosts = posts.map((post, i) => {
+const allPosts = posts.filter(postMatches).map((post, i) => {
     return(
-    <li key={i} id='allposts'>
+    <li key={i} className='allposts'>
         <div>
         <h1>{post.title}</h1>
         <p>{post.description}</p>
@@ -45,7 +64,7 @@ const allPosts = posts.map((post, i) => {
 
     return(
         <>
-        <Search />
+        <Search setText={setText} />
         <h1 onClick={showNewPost}>Add New Post</h1>
         {
             posts ?

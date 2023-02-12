@@ -1,18 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 
-const Search = () => {
-    const [posts, setPosts] = useState([]);
-    const [searchTerm, setSearchTerm] = useState('');
 
+const Search = (props) => {
+const [ searchTerm, setSearchTerm ] = useState("")
 function postMatches(post, text) {
-
+    const regexp = `/(${text})\w+/gi`
+    const regexpFilter = new RegExp(regexp);
+    const hasMatched = regexpFilter.test(post.title)
+    return hasMatched 
 }
+// if(props.posts && searchTerm) {
 
-const filteredPosts = posts.filter(post => postMatches(post, searchTerm));
-const postsToDisplay = searchTerm.length ? filteredPosts : posts;
+//     const filteredPosts = props.posts.filter(post => postMatches(post, searchTerm));
+//     props.setFilterPosts(filteredPosts)
+// }
 
     return(
         <>
+        <input type='search' onChange={(e) => props.setText(e.target.value)}></input>
         </>
     )
 }
