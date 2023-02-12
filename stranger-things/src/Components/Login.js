@@ -53,6 +53,7 @@ const Login = (props) => {
         .then(result => {
             console.log(result);
             window.localStorage.setItem('token', result.data.token)
+            navigate('/profile')
         })
         .catch(console.error);
     }
