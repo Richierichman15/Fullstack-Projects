@@ -56,6 +56,8 @@ const allPosts = posts.filter(postMatches).map((post, i) => {
         <p>{post.price}</p>
         <p>{post.location}</p>
         <button>view</button>
+        <button id='delete'>Delete</button>
+        <button>Edit</button>
     </div>
     </li>
     )
@@ -64,8 +66,9 @@ const allPosts = posts.filter(postMatches).map((post, i) => {
 
     return(
         <>
+        
+        <button id='newpost' onClick={showNewPost}>Add New Post</button>
         <Search setText={setText} />
-        <h1 onClick={showNewPost}>Add New Post</h1>
         {
             posts ?
             <ul >{allPosts}</ul>

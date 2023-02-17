@@ -10,11 +10,11 @@ const Header = () => {
     return (
         <>
         <nav>
-            <h1>Stranger Thing's</h1>
-            <Link to='/'>Home</Link>
-            <Link to='/post'>Post</Link>
-            <Link to='/login'>Login/Register</Link>
-            <Link to='/profile'>Profile</Link>
+            <h1 className="header">Stranger Thing's</h1>
+            <Link to='/' className="header">Home</Link>
+            <Link to='/post' className="header">Post</Link>
+            <Link to='/login' className="header" >Login/Register</Link>
+            <Link to='/profile' className="header" >Profile</Link>
         </nav>
         </>
     )

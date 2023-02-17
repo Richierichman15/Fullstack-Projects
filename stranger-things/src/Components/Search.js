@@ -17,7 +17,7 @@ function postMatches(post, text) {
 
     return(
         <>
-        <input type='search' onChange={(e) => props.setText(e.target.value)}></input>
+        <input type='search' onChange={(e) => props.setText(e.target.value)} placeholder='Searching...'></input>
         </>
     )
 }

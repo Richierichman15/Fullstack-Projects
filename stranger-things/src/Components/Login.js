@@ -61,11 +61,11 @@ const Login = (props) => {
     return (
         <>
             {
-                props.isLoggedIn ? <p>Yay! You're logged in!</p> : null
+                props.isLoggedIn ? <p>Yay! You're logged in!</p> : <p>Create a New Login</p>
             }
         <form>
-            <input type="text" placeholder='username' value={username} onChange={(e) => setUserName(e.target.value)}></input>
-            <input type="text" placeholder='password' value={password} onChange={handlePasswordChange}></input>
+            <input classname='login' type="text" placeholder='username' value={username} onChange={(e) => setUserName(e.target.value)}></input><br></br>
+            <input classname='login' type="password" placeholder='password' value={password} onChange={handlePasswordChange}></input><br></br>
             {
                 showLoginButton ?
                 <>
@@ -73,8 +73,8 @@ const Login = (props) => {
                 <button onClick={() => setShowLoginButton(false)}>Not Registered? Click Here!</button> 
                 </> :
                 <>
-                <input type="text" placeholder='confirm password'></input>
-                <button onClick={handleClick}>Register</button>
+                <input classname='login' type="password" placeholder='confirm password'></input><br></br>
+                <button onClick={handleClick}>Register</button><br></br>
                 <button onClick={() => setShowLoginButton(true)}>Already Registered? Click Here!</button>
                 </>
             }
