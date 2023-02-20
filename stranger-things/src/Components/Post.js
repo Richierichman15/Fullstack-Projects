@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import Search from './Search'
 import { useNavigate } from "react-router-dom";
 import NewPost from './NewPost';
+import Delete from './Delete';
+import Message from './Message';
 
 
 const Post = () => {
@@ -56,7 +58,8 @@ const allPosts = posts.filter(postMatches).map((post, i) => {
         <p>{post.price}</p>
         <p>{post.location}</p>
         <button>view</button>
-        <button id='delete'>Delete</button>
+        <button id='message' onChange={Message}>Messeage the Author</button>
+        <button id='delete' onChange={Delete}>Delete</button>
         <button>Edit</button>
     </div>
     </li>

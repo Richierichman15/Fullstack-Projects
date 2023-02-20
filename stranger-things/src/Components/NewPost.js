@@ -44,12 +44,12 @@ const NewPost = () => {
     return(
         <>
         <h1>Add New Post</h1>
-        <input type='text' placeholder='Title' onChange={(e) => setTitle(e.target.value)}></input>
-        <input type='text' placeholder='Description' onChange={(e) => setDescription(e.target.value)}></input> 
-        <input type='text' placeholder='Price' onChange={(e) => setPrice(e.target.value)}></input>
-        <input type='text' placeholder='Location' onChange={(e) => setLocation(e.target.value)}></input>
+        <input id="post" type='text' placeholder='Title' onChange={(e) => setTitle(e.target.value)}></input>
+        <input id="post" type='text' placeholder='Description' onChange={(e) => setDescription(e.target.value)}></input> 
+        <input id="post" type='text' placeholder='Price' onChange={(e) => setPrice(e.target.value)}></input>
+        <input id="post" type='text' placeholder='Location' onChange={(e) => setLocation(e.target.value)}></input>
         <input type="checkbox" id='deliver' checked={deliver} onChange={handleDeliver}></input>
-        <label htmlFor='deliver'>Willing to deliver?</label>
+        <label htmlFor='deliver'>Willing to deliver?</label><br></br>
         <button onClick={createPost}>Create</button>
         </>
     )

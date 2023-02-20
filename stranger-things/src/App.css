@@ -1,8 +1,9 @@
 nav {
   font-size: 20px;
-  background-color: aquamarine;
+  background-color: orange;
   padding: 5px;
   text-align: center;
+  color: white
 }
 
 a {
@@ -10,6 +11,7 @@ a {
   align-items: flex-end;
   margin: 5px;
   text-align: center;
+  color: white;
 }
 
 button {
@@ -45,6 +47,8 @@ input[type=text] {
   padding: 12px 20px;
   margin: 8px 0;
   box-sizing: border-box;
+  /* outline: 1rem solid; */
+  color: white;
 }
 
 input[type=password] {
@@ -58,8 +62,31 @@ input[type=search] {
   width: 30%;
   
 }
-/* form {
+
+#home {
+  text-align: center;
+}
+
+#message {
+  background-color: burlywood;
+}
+
+div {
+  background-color: skyblue;
+  outline:  solid;
+}
+
+#post {
+  color: skyblue;
   display: flex;
-  justify-content: center;
-  align-items: center;
-} */
+  flex-wrap: wrap;
+  margin: 60px;
+}
+
+#deliver {
+  margin-right: 10px;
+}
+
+.login {
+  color: black
+}
