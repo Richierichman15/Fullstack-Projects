@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import Search from './Search'
 import { useNavigate } from "react-router-dom";
-import NewPost from './NewPost';
-import Delete from './Delete';
-import Message from './Message';
 
 
-const Post = () => {
+const Post = ( props ) => {
+    
+    const [ token, setToken ] = useState(window.localStorage.getItem('token'))
     const [ posts, setPosts ] = useState([])
     const [filteredPosts, setFilterPosts] = useState([])
     const [ text, setText ] = useState('')
@@ -45,10 +44,52 @@ useEffect(() => {
 }, [])
 
 
+const getDelete = async(id) => {
+    console.log('====================================');
+    console.log('here');
+    console.log('====================================');
+    fetch(`https://strangers-things.herokuapp.com/api/2211-ftb-et-web-am/posts/${id}`, {
+    method: "DELETE",
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+    }
+        }).then(response => response.json())
+        .then(result => {
+            
+            console.log(result);
+            const newPosts = posts.filter(post => post._id !== id)
+            setPosts(newPosts)
+            
+        })
+        .catch(console.error);
+        }
+   
+
+
 
 const showNewPost = () => {
     navigate('/post/add')
 }
+
+const showComments = (_id) => {
+    navigate(`/post/view/${_id}`, {
+        id: _id
+    }) 
+};
+
+const showEdit = (post) => {
+    navigate(`/post/edit`, {
+        state: { post }
+    })
+}
+
+const showMessage = (_id) => {
+    navigate(`/post/message`, {
+        state: { _id }
+    })
+}
+
 const allPosts = posts.filter(postMatches).map((post, i) => {
     return(
     <li key={i} className='allposts'>
@@ -57,10 +98,10 @@ const allPosts = posts.filter(postMatches).map((post, i) => {
         <p>{post.description}</p>
         <p>{post.price}</p>
         <p>{post.location}</p>
-        <button>view</button>
-        <button id='message' onChange={Message}>Messeage the Author</button>
-        <button id='delete' onChange={Delete}>Delete</button>
-        <button>Edit</button>
+        <button onClick={() => showComments(post._id)}>view comments</button>
+        <button id='message' onClick={() => showMessage(post._id)} >Messeage the Author</button>
+        <button id='delete' onClick={() => getDelete(post._id)}>Delete</button>
+        <button onClick={() => showEdit(post)}>Edit</button>
     </div>
     </li>
     )
@@ -69,8 +110,12 @@ const allPosts = posts.filter(postMatches).map((post, i) => {
 
     return(
         <>
-        
-        <button id='newpost' onClick={showNewPost}>Add New Post</button>
+        {
+           props.isLoggedIn ?  <>
+            <h1>Welcome to Stranger's Things!</h1>
+            <button id='newpost' onClick={showNewPost}>Add New Post</button>
+           </>  : null 
+        }
         <Search setText={setText} />
         {
             posts ?

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import Login from './Login'
+
 
 const Profile = (props) => {
-    const [ getProfile, setgetProfile] = useState([])
     const [ token, setToken ] = useState(window.localStorage.getItem('token'))
+    const [ messages, setMessages ] = useState([])
 
     useEffect(() => {
         const getProfile = async() => {
@@ -16,21 +16,24 @@ const Profile = (props) => {
             }).then(response => response.json())
 
             console.log(response)
+            setMessages(response.data.messages)
+            console.log(messages);
         }
         getProfile()
     }, [])
 
-    const handleChange = (event) => {
-        setgetProfile(event.target.value)
-    }
+ 
     return(
         <>
         {
             props.isLoggedIn ?
             <>
+            <h1>Message From me:</h1>
+            
             </> :
             null
         }
+         
         </>
     )
 }

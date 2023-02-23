@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 
-const NewPost = () => {
+const NewPost = ( props ) => {
     const [ token, setToken ] = useState(window.localStorage.getItem('token'))
     const [ title, setTitle ] = useState('');
     const [ description, setDescription ] = useState('');
@@ -31,7 +31,7 @@ const NewPost = () => {
             }).then(response => response.json())
             .then(result => {
                 console.log(result);
-                navigate('/post')
+                navigate('/posts')
             })
             .catch(console.error);
     }
@@ -43,16 +43,23 @@ const NewPost = () => {
 
     return(
         <>
+        { 
+        props.isLoggedIn ?  
+        <>
         <h1>Add New Post</h1>
-        <input id="post" type='text' placeholder='Title' onChange={(e) => setTitle(e.target.value)}></input>
-        <input id="post" type='text' placeholder='Description' onChange={(e) => setDescription(e.target.value)}></input> 
-        <input id="post" type='text' placeholder='Price' onChange={(e) => setPrice(e.target.value)}></input>
-        <input id="post" type='text' placeholder='Location' onChange={(e) => setLocation(e.target.value)}></input>
+        <input className='posts' type='text' placeholder='Title'  onChange={(e) => setTitle(e.target.value)}></input>
+        <input className='posts' type='text' placeholder='Description' onChange={(e) => setDescription(e.target.value)}></input> 
+        <input className='posts' type='text' placeholder='Price' onChange={(e) => setPrice(e.target.value)}></input>
+        <input className='posts' type='text' placeholder='Location' onChange={(e) => setLocation(e.target.value)}></input>
         <input type="checkbox" id='deliver' checked={deliver} onChange={handleDeliver}></input>
         <label htmlFor='deliver'>Willing to deliver?</label><br></br>
         <button onClick={createPost}>Create</button>
         </>
+        : null
+        }
+        </>
     )
+
 }
 
 

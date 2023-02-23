@@ -1,6 +1,6 @@
 nav {
   font-size: 20px;
-  background-color: orange;
+  background-color: darksalmon;
   padding: 5px;
   text-align: center;
   color: white
@@ -48,7 +48,7 @@ input[type=text] {
   margin: 8px 0;
   box-sizing: border-box;
   /* outline: 1rem solid; */
-  color: white;
+  /* color: white; */
 }
 
 input[type=password] {
@@ -72,11 +72,11 @@ input[type=search] {
 }
 
 div {
-  background-color: skyblue;
+  background-color: blanchedalmond;
   outline:  solid;
 }
 
-#post {
+.posts {
   color: skyblue;
   display: flex;
   flex-wrap: wrap;
@@ -87,6 +87,10 @@ div {
   margin-right: 10px;
 }
 
-.login {
-  color: black
+#create {
+  font-size: larger;
+}
+
+#login {
+  color: black;
 }
