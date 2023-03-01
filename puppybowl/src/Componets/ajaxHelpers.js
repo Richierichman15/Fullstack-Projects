@@ -1,11 +1,11 @@
 import React from 'react'
-import { renderSinglePlayer } from "./renderHelpers"
+
 
 
 const APIURL = `https://fsa-puppy-bowl.herokuapp.com/api/2207-FTB-ET-WEB-AM`
 
-const ajaxHelpers = async() => {
- const fetchAllPlayers = async () => {
+
+ export const fetchAllPlayers = async () => {
 
     try {
         const response = await fetch(`${APIURL}/players`);
@@ -19,7 +19,7 @@ const ajaxHelpers = async() => {
     }
 };
 
- const fetchSinglePlayer = async (playerId) => {
+ export const fetchSinglePlayer = async (playerId) => {
 
     try {
         const response = await fetch(`${APIURL}/players/${playerId}`);
@@ -27,33 +27,33 @@ const ajaxHelpers = async() => {
         if (result.error) {
             throw result.error
         }
-        renderSinglePlayer(result.data.player);
+        
     } catch (error) {
-        console.error(err)
+        console.error(error)
     }
 };
 
- const addNewPlayer = async (playerObj) => {
+ export const addNewPlayer = async (playerObj) => {
 
     try {
-        const response = await fetch(`${APIURL}/players`)
-        {
+        const response = await fetch(`${APIURL}/players`, {
+        
             method: 'POST',
-            headers; {
-                'Content-Type'; 'application/json';
-            }
+            headers: {
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify
-        }
+        });
         const result = await response.json();
     }   catch (err) {
         console.error(err);
     }
 };
 
- const removePlayer = async (playerId) => {
-    fetch(`${APIURL}/players`) 
+ export const removePlayer = async (playerId) => {
+    fetch(`${APIURL}/players`, { 
         method: 'DELETE'
-    };
+    });
     try {
         const response = await fetch(`${APIURL}/players/${playerId}`, {
             method: 'DELETE',
@@ -63,7 +63,7 @@ const ajaxHelpers = async() => {
     }   catch (err) {
         console.error(err);
     };
+ };
 
-}
 
-export default ajaxHelpers;
+

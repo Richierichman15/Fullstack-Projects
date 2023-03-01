@@ -1,18 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 
-const Search = (props) => {
-const  postMatches = (post, text) => {
-    const regexp = `/(${text})\w+/gi`
-    const regexpFilter = new RegExp(regexp);
-    const hasMatched = regexpFilter.test(post.title)
-    return hasMatched 
-}
-
+const Search = ({setSearch}) => {
+    
 
     return(
         <>
-        <input type='search' onChange={(e) => props.setText(e.target.value)} placeholder='Searching...'></input>
+        <input type='search' onChange={(e) => setSearch(e.target.value)} placeholder='Searching...'></input>
         </>
     )
 }
