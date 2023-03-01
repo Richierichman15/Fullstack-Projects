@@ -8,7 +8,7 @@ const Header = (props) => {
 
   
 
-    const postMatches = (post)  => {
+    const puppyMatches = (post)  => {
         
         if (name) {
             const str = `/(${name})\w+/gi`
